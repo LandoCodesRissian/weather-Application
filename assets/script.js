@@ -74,12 +74,8 @@ function fetchAndDisplayForecast(cityName) {
 
 // Function to display the 5-day forecast with only the high temperature
 function displayForecast(forecastData) {
-    // Clear the existing forecast section
     forecastSection.innerHTML = '';
-
-    // Initialize an object to store the high temperature for each day
     const highTemperatures = {};
-
     // Loop through the forecast data and update the high temperature for each day
     forecastData.forEach(item => {
         const date = new Date(item.dt * 1000);
@@ -98,16 +94,12 @@ function displayForecast(forecastData) {
         if (highTemperatures.hasOwnProperty(dateKey)) {
             const date = new Date(dateKey);
             const temperature = highTemperatures[dateKey];
-
-            // Create HTML for each day's high temperature
             const forecastHTML = `
                 <div class="forecast-item">
                     <p>Date: ${date.toLocaleDateString()}</p>
                     <p>High Temperature: ${temperature} °C</p>
                 </div>
             `;
-
-            // Append the forecast HTML to the forecast section
             forecastSection.innerHTML += forecastHTML;
         }
     }
@@ -148,16 +140,11 @@ function saveToSearchHistory(cityName) {
 function displaySearchHistory(searchHistory) {
     // Clear the existing search history
     searchHistoryList.innerHTML = '';
-
-    // Create list items for each city in the search history
     searchHistory.forEach(city => {
         const listItem = document.createElement('li');
         listItem.textContent = city;
         listItem.classList.add('search-history-item');
-
-        // Add click event listener to search history items
         listItem.addEventListener('click', () => {
-            // Trigger a new search when a city in the history is clicked
             cityInput.value = city;
             searchForm.dispatchEvent(new Event('submit'));
         });
