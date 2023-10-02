@@ -1,22 +1,22 @@
+const apiKey = 'ff6a5f180fbc5f515345227aeee3013f';
+const searchForm = document.getElementById('search-form');
+const cityInput = document.getElementById('city-input');
+const currentWeatherSection = document.getElementById('current-weather');
 
-const apiKey = "ff6a5f180fbc5f515345227aeee3013f";
+searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-document.getElementById("searchBtn").addEventListener("click", function () {
-    const location = document.getElementById("location").value;
+    const cityName = cityInput.value;
 
-    
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`)
+    // Make an API request to get current weather data
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         .then(response => response.json())
         .then(data => {
-            
-            document.getElementById("locationName").textContent = data.city.name;
-            
-            
-            const firstForecast = data.list[0];
-            document.getElementById("temperature").textContent = firstForecast.main.temp;
-            document.getElementById("condition").textContent = firstForecast.weather[0].description;
+            // Display current weather data in currentWeatherSection
+            console.log(data)
+            // Extract and format the relevant information
         })
         .catch(error => {
-            console.error("Error fetching weather data:", error);
+            console.error('Error fetching data:', error);
         });
 });
